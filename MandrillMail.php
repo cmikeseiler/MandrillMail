@@ -96,7 +96,7 @@ class MandrillMail
      *
      * @param boolean $setTestMode Sets Test mode
      */
-    public function __construct($setTestMode = null)
+    public function __construct(bool $setTestMode = null)
     {
         $apiKey = isset($setTestMode) ? $this->apiTestKey : $this->apiKey;
         $this->mandrill = new Mandrill($apiKey);
@@ -123,7 +123,7 @@ class MandrillMail
      *
      * @param string $date Date string in PHP "Y-m-d H:i:s" format
      */
-    public function setSendAt($date)
+    public function setSendAt(string $date)
     {
         $this->sendAt = $date;
     }
@@ -198,7 +198,7 @@ class MandrillMail
      * @param string $headerType Type of header to add
      * @param string $headerValue Value of added header type
      */
-    public function addHeader($headerType, $headerValue)
+    public function addHeader(string $headerType, string $headerValue)
     {
         $this->options['headers'] = [$headerType => $headerValue];
     }
@@ -227,7 +227,7 @@ class MandrillMail
      * @param string $name Name of the attachment
      * @param string $content Base64 encoded body of the attachment
      */
-    public function addAttachment($type, $name, $content)
+    public function addAttachment(string $type, string $name, string $content)
     {
         $this->options['attachments'][] = [
             'type'=>$type,
@@ -243,7 +243,7 @@ class MandrillMail
      * @param string $name Name of the attachment
      * @param string $content Base64 encoded body of the attachment
      */
-    public function addImage($type, $name, $content)
+    public function addImage(string $type, string $name, string $content)
     {
         $this->options['images'][] = [
             'type'=>$type,
@@ -300,7 +300,7 @@ class MandrillMail
      * @param string $templateName The slug in Mandrill
      * @param array $templateContent The Content to send - none if you have a template that only uses merge vars
      */
-    public function sendTemplate($templateName, $templateContent)
+    public function sendTemplate(string $templateName, array $templateContent)
     {
         try {
             $result = $this->mandrill->messages->sendTemplate(
@@ -317,4 +317,3 @@ class MandrillMail
         }
     }
 }
-
