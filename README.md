@@ -76,7 +76,7 @@ to reference the id of the image in your inline HTML. If you add an image or fil
 as an attachment, it will display in email as a regular attachment.
 ```php
 $file = file_get_contents("public/images/my_image.png");
-$mail->addImage("image/png", "my_image.png", $file);
+$mail->addImage("my_image.png", $file);
 // Adding it for use inline in message:
 $mail->setBodyHtml("<h1>Hello</h1><p>Here's an image.<img src='cid:my_image.png'></p>");
 // Adding an image/pdf/file as an attachment
