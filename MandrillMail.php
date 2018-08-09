@@ -59,7 +59,7 @@ class MandrillMail
         'merge_language' => 'mailchimp',
         'global_merge_vars' => null,
         'merge_vars' => null,
-        'tags' => ['password-resets'],
+        'tags' => [],
         'google_analytics_domains' => ['example.com'],
         'google_analytics_campaign' => 'gac@example.com',
         'metadata' => ['website' => 'example.com'],
@@ -239,16 +239,17 @@ class MandrillMail
     /**
      * Adds an image to Mandrill email
      *
-     * @param string $type Mime type of the attachment
      * @param string $name Name of the attachment
-     * @param string $content Base64 encoded body of the attachment
+     * @param string $contentPath path to the image
      */
-    public function addImage(string $type, string $name, string $content)
+    public function addImage($name, $contentPath)
     {
+        $data = file_get_contents($contentPath);
+        $type = pathinfo($contentPath, PATHINFO_EXTENSION);
         $this->options['images'][] = [
             'type'=>$type,
             'name'=>$name,
-            'content'=>base64_encode($content)
+            'content'=>base64_encode($data)
         ];
     }
 
